@@ -1,5 +1,5 @@
 import streamlit as st
-from job_api_handler import JobAPIHandler
+from Functions.job_api_handler import JobAPIHandler
 from Functions.mydatabase import get_db
 
 def dashboard():
@@ -55,3 +55,4 @@ def dashboard():
                             # Open link in a new tab
                             st.link_button("Apply Now", job.get('link', '#'), use_container_width=True)
                         st.divider()
+
