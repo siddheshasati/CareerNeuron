@@ -3,4 +3,5 @@ pandas
 requests
 beautifulsoup4
 sqlalchemy
+google-generativeai
 python-dotenv
