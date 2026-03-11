@@ -1,7 +1,10 @@
 streamlit
+google-generativeai
 pandas
 requests
 beautifulsoup4
 sqlalchemy
-google-generativeai
 python-dotenv
+Pillow
+PyPDF2
+fpdf
