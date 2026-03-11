@@ -40,7 +40,7 @@ def main():
     
     # ... rest of your code ...
     if st.session_state.user is None:
-        # Show login page
+        pass  # This tells Python to do nothing and move on
 
     if st.session_state.user is None:
         auth_page()
@@ -100,4 +100,5 @@ if __name__ == "__main__":
     init_db() # Ensure DB is ready
 
     main()
+
 
