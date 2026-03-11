@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import sqlite3
-from job_api_handler import JobAPIHandler
+from Functions.job_api_handler import JobAPIHandler
 from Functions.mydatabase import get_db
 
 def job_matcher_ui():
@@ -68,4 +68,5 @@ def job_matcher_ui():
                         with c2:
                             st.write("##")
                             st.link_button("Apply", job.get('link', '#'), use_container_width=True)
+
                         st.divider()
