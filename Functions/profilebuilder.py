@@ -383,7 +383,7 @@ def my_account():
     with tab_overview:
         col1, col2 = st.columns([1, 3])
         with col1:
-            if user[14] and user[14] != "": 
+            if user['profile_pic'] and user['profile_pic'] != "": 
                 st.markdown(f'<img src="data:image/png;base64,{user[14]}" width="150" style="border-radius: 10px;">', unsafe_allow_html=True)
             else:
                 st.warning("No Profile Image")
@@ -486,4 +486,5 @@ def my_account():
                 st.rerun()
 
     conn.close()
+
 
