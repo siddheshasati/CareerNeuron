@@ -36,6 +36,15 @@ def main():
         key = st.secrets["GEMINI_API_KEY"]
         st.session_state.ai_engine = AI_Engine(api_key=key)
 
+    if "ai_engine" not in st.session_state:
+        try:
+            # Dashboard ke Secrets se key uthayein
+            my_key = st.secrets["GEMINI_API_KEY"]
+            st.session_state.ai_engine = AI_Engine(api_key=my_key)
+        except Exception as e:
+            st.error("Secrets mein GEMINI_API_KEY nahi mila!")
+            
+
     # Initialize session state keys if they don't exist
     if "user" not in st.session_state:
         st.session_state.user = None
@@ -102,6 +111,7 @@ if __name__ == "__main__":
     init_db() # Ensure DB is ready
 
     main()
+
 
 
 
