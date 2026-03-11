@@ -16,7 +16,7 @@ def navigate_to(page):
     st.rerun()
 
 def auth_page():
-    st.title("🚀 Pro Job Portal")
+    st.title("CareerNeuron")
     tab1, tab2 = st.tabs(["Login", "Sign Up"])
 
     with tab1:
@@ -45,4 +45,5 @@ def auth_page():
                              (new_email, new_mob, new_pwd, role))
                 conn.commit()
                 st.success("Success! Please Login.")
+
             except: st.error("Email already registered.")
