@@ -16,7 +16,7 @@ from Functions.authentication import navigate_to
 # --- 1. Configuration & API ---
 st.set_page_config(page_title="CareerNeuron", layout="wide")
 # Replace with your actual key or use st.secrets["GEMINI_KEY"]
-genai.configure(api_key="AIzaSyDkK1mctcL8K2-iDKDsMjoDD5xkqmuCmLM")
+genai.configure(api_key="GEMINI_API_KEY")
 
 
 
@@ -483,4 +483,5 @@ def my_account():
                 conn.commit()
                 st.success("Profile Updated!")
                 st.rerun()
+
     conn.close()
