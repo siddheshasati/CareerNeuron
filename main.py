@@ -18,7 +18,8 @@ from Functions.cover_letter import generate_cover_letter_ui
 # Simple AI Engine to handle LLM calls
 class AI_Engine:
     def __init__(self, api_key):
-        genai.configure(api_key='GEMINI_API_KEY')
+        
+        genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
         self.model = genai.GenerativeModel('gemini-2.5-flash')
 
     def get_response(self, prompt):
@@ -32,7 +33,8 @@ def main():
     # Initialize AI Engine in session state
     if "ai_engine" not in st.session_state:
         # Use your Gemini API Key here
-        st.session_state.ai_engine = AI_Engine(api_key="GEMINI_API_KEY")
+        key = st.secrets["GEMINI_API_KEY"]
+            st.session_state.ai_engine = AI_Engine(api_key=key)
 
     # Initialize session state keys if they don't exist
     if "user" not in st.session_state:
@@ -100,5 +102,6 @@ if __name__ == "__main__":
     init_db() # Ensure DB is ready
 
     main()
+
 
 
