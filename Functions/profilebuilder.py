@@ -372,34 +372,41 @@ def profile_builder():
 def my_account():
     st.title("👤 Professional Profile")
     conn = get_db()
-    user = conn.execute("SELECT * FROM users WHERE email=?", (st.session_state.user['email'],)).fetchone()
     
-    # Organize data into tabs for clarity
+    # Fetch the user
+    user = conn.execute("SELECT * FROM users WHERE email=?", (st.session_state.user['email'],)).fetchone()
+    conn.close() # Close connection early to avoid locks
+
+    # CRUCIAL SAFETY CHECK: If user isn't in the DB yet
+    if user is None:
+        st.warning("⚠️ No profile data found. Please go to the 'Profile Builder' to set up your account.")
+        if st.button("Go to Profile Builder"):
+            st.session_state.page = "Profile Builder" # Or your navigation logic
+            st.rerun()
+        return
+
+    # Tabs logic
     tab_overview, tab_edu, tab_exp, tab_edit = st.tabs([
         "📄 Overview", "🎓 Education", "💼 Work Experience", "⚙️ Edit Profile"
     ])
 
-    # --- TAB 1: OVERVIEW ---
     with tab_overview:
         col1, col2 = st.columns([1, 3])
         with col1:
-            if user['profile_pic'] and user['profile_pic'] != "": 
-                st.markdown(f'<img src="data:image/png;base64,{user[14]}" width="150" style="border-radius: 10px;">', unsafe_allow_html=True)
+            # USE COLUMN NAMES ONLY
+            if user['profile_pic']: 
+                st.markdown(f'<img src="data:image/png;base64,{user["profile_pic"]}" width="150" style="border-radius: 10px;">', unsafe_allow_html=True)
             else:
                 st.warning("No Profile Image")
         
         with col2:
-            st.subheader(user[6] if user[6] else "User Name")
-            st.write(f"📧 **Email:** {user[1]}")
-            st.write(f"📞 **Mobile:** {user[2]}")
+            st.subheader(user['full_name'] if user['full_name'] else "User Name")
+            st.write(f"📧 **Email:** {user['email']}")
+            st.write(f"📞 **Mobile:** {user['mobile']}")
             
-            loc_parts = [user[12], user[11], user[10]] 
+            loc_parts = [user['city'], user['state'], user['country']] 
             clean_loc = ", ".join([str(p) for p in loc_parts if p and str(p).lower() != "none"])
             st.write(f"📍 **Location:** {clean_loc if clean_loc else 'Not Set'}")
-
-    # --- Helper function for safe list indexing ---
-    def safe_get(lst, idx, default="N/A"):
-        return lst[idx] if len(lst) > idx and lst[idx] else default
 
     # --- TAB 2: EDUCATION ---
     with tab_edu:
@@ -486,5 +493,6 @@ def my_account():
                 st.rerun()
 
     conn.close()
+
 
 
