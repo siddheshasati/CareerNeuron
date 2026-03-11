@@ -34,6 +34,14 @@ def main():
         # Use your Gemini API Key here
         st.session_state.ai_engine = AI_Engine(api_key="GEMINI_API_KEY")
 
+    # Initialize session state keys if they don't exist
+    if "user" not in st.session_state:
+        st.session_state.user = None
+    
+    # ... rest of your code ...
+    if st.session_state.user is None:
+        # Show login page
+
     if st.session_state.user is None:
         auth_page()
     else:
@@ -92,3 +100,4 @@ if __name__ == "__main__":
     init_db() # Ensure DB is ready
 
     main()
+
