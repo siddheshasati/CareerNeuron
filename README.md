@@ -26,6 +26,10 @@ Experience the full power of CareerNeuron here:
 
 ---
 
+🚧 Ongoing Development
+
+Building a robust AI pipeline for CareerNeuron using a self-integrated LLM combined with RAG architecture. Actively working on fine-tuning strategies and implementing techniques to minimize hallucinations and improve response reliability.
+
 ## ⚙️ How It Works (Real-Time Pipeline)
 
 CareerNeuron utilizes a "Neural Feedback Loop" to ensure every piece of advice is grounded in current market data:
